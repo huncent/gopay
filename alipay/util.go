@@ -91,7 +91,7 @@ func Base64Encode(b []byte) string {
 func UrlWithOutEncode(m map[string]string)  string{
 	var slice []string
 	for k,v :=range m {
-		if k == "sign" {
+		if k == "sign" || k=="notify_url" || k =="return_url" {
 			continue
 		}
 		slice = append(slice,k+"="+v)
