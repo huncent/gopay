@@ -76,6 +76,7 @@ func (c *ClientParams) SignKey(pemPath string) string {
 	if err != nil {
 		log.Println(err.Error())
 	}
+	log.Println(string(code))
 	c.Sign = Base64Encode(code)
 	log.Println(c.Sign)
 	u = u + "&sign=" + c.Sign

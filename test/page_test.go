@@ -5,15 +5,23 @@ import (
 	"github.com/go-fmt/gopay/alipay"
 	"reflect"
 	"log"
+	"encoding/json"
 )
 
 func Test_sign(t *testing.T)  {
+	p :=&alipay.PagePayParams{}
+	p.OutTradeNo = "20150320010101001"
+	p.ProductCode = "FAST_INSTANT_TRADE_PAY"
+	p.TotalAmount = 88.88
+	js,_:=json.Marshal(p)
 	s :=new(alipay.ClientParams)
 	s.NewClient()
 	s.AppId = "safasdasda"
 	s.NotifyUrl = "http://192.168.1.1/notify"
 	s.ReturnUrl = "http://192.168.1.1/return"
+	s.BizContent = string(js)
 	s.SignKey("F:\\cacert.pem")
+
 }
 
 func Test_reflect(t *testing.T)  {

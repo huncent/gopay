@@ -60,6 +60,7 @@ sLqen0K1ibjhgbcs0LjoVklK9fxJ5AK7SwU0Oxaq0w==
 		log.Println(err.Error())
 		return nil, err
 	}
+	log.Println(string(block.Bytes))
 	h := sha1.New()
 	h.Write(origData)
 	digest := h.Sum(nil)
