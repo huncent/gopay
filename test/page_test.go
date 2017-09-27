@@ -10,9 +10,10 @@ import (
 func Test_sign(t *testing.T)  {
 	s :=new(alipay.ClientParams)
 	s.NewClient()
-	a :=new(alipay.Client)
-	a.Request(*s)
-
+	s.AppId = "safasdasda"
+	s.NotifyUrl = "http://192.168.1.1/notify"
+	s.ReturnUrl = "http://192.168.1.1/return"
+	s.SignKey("F:\\cacert.pem")
 }
 
 func Test_reflect(t *testing.T)  {
