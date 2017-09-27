@@ -10,7 +10,8 @@ import (
 )
 
 const (
-	RequestUrl = "openapi.alipay.com/gateway.do"
+	RequestUrl = "https://openapi.alipay.com/gateway.do"
+	Method = "alipay.trade.page.pay"
 	Charset    = "UTF-8"
 	Format     = "json"
 )
@@ -46,7 +47,7 @@ type Client struct {
 }
 
 func (c *ClientParams) NewClient() *ClientParams {
-	c.Method = RequestUrl
+	c.Method = Method
 	if c.Format == "" {
 		c.Format = Format
 	}
@@ -65,7 +66,7 @@ func (c *Client) Request(param *ClientParams) {
 	for k, v := range serialize(param) {
 		c.url.Set(k, v)
 	}
-	req, err := http.NewRequest(http.MethodPost, "https://"+RequestUrl, strings.NewReader(c.url.Encode()))
+	req, err := http.NewRequest(http.MethodPost, RequestUrl, strings.NewReader(c.url.Encode()))
 	if err != nil {
 		log.Println(err.Error())
 	}
