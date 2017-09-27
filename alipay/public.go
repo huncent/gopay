@@ -29,6 +29,17 @@ type ClientParams struct {
 	BizContent string `json:"biz_content"`
 }
 
+type NotifyParams struct {
+	NotifyTime string `json:"notify_time"`
+	NotifyType string `json:"notify_type"`
+	NotifyId   string `json:"notify_id"`
+	Charset    string `json:"charset"`
+	Version    string `json:"version"`
+	SignType   string `json:"sign_type"`
+	Sign       string `json:"sign"`
+	AuthAppId  string `json:"auth_app_id"`
+}
+
 type Client struct {
 	url    url.Values
 	client *http.Client
