@@ -20,3 +20,13 @@ func Test_reflect(t *testing.T)  {
 	s.NewClient()
 	log.Println(reflect.TypeOf(*s).NumField())
 }
+
+func Test_sort(t *testing.T)  {
+	m :=make(map[string]string)
+	m["name"] ="ajfasfa"
+	m["job"] = "fasdasd"
+	m["hhah"] = "dasfas"
+	for k,v :=range m {
+		log.Println(k,v)
+	}
+}

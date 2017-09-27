@@ -48,9 +48,13 @@ func (c *ClientParams) NewClient() *ClientParams{
 func (c *Client) Request(param ClientParams){
 	s,_:=json.Marshal(param)
 	m :=make(map[string]string)
-	r :=json.Unmarshal(s,&m)
-	for k,v :=range r {
-		c.Values.Add(k,v.(string))
+	err :=json.Unmarshal(s,&m)
+	if err !=nil{
+		log.Println(err.Error())
+	}
+	c.Values = make(url.Values)
+	for k,v :=range m {
+		c.Values.Set(k,v)
 	}
 	log.Println(c.Values.Encode())
 }
