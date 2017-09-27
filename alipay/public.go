@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	RequestUrl = "https://openapi.alipay.com/gateway.do"
+	RequestUrl = "openapi.alipay.com/gateway.do"
 	Charset ="UTF-8"
 	Format = "json"
 )
@@ -28,10 +28,10 @@ type ClientParams struct {
 }
 
 type Client struct {
-	url.Values
+	url url.Values
 }
 
-func (c *ClientParams) NewClient() *ClientParams{
+func (c *ClientParams) NewClient(appId string,privateKey string) *ClientParams{
 	c.Method = RequestUrl
 	if c.Format =="" {
 		c.Format = Format
@@ -45,18 +45,18 @@ func (c *ClientParams) NewClient() *ClientParams{
 	return c
 }
 
-func (c *Client) Request(param ClientParams){
+func (c *Client) Request(param *ClientParams){
 	s,_:=json.Marshal(param)
 	m :=make(map[string]string)
 	err :=json.Unmarshal(s,&m)
 	if err !=nil{
 		log.Println(err.Error())
 	}
-	c.Values = make(url.Values)
+	c.url = make(url.Values)
 	for k,v :=range m {
-		c.Values.Set(k,v)
+		c.url.Set(k,v)
 	}
-	log.Println(c.Values.Encode())
+	log.Println(c.url.Encode())
 }
 
 func (c ClientParams) sign(secret string) string {
